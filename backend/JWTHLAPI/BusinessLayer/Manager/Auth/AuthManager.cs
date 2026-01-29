@@ -1,0 +1,80 @@
+﻿using JWTHLAPI.DataLayer.Interfaces.Auth;
+using JWTHLAPI.Helpers;
+using JWTHLAPI.ModelLayer.DTO.Auth;
+using JWTHLAPI.ModelLayer.Entities.Auth;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace JWTHLAPI.BusinessLayer.Manager.Auth
+{
+    public class AuthManager
+    {
+        private readonly IUserRepository _userRepository;
+        private readonly JwtTokenHelper _jwtTokenHelper;
+
+        public AuthManager(
+            IUserRepository userRepository,
+            JwtTokenHelper jwtTokenHelper)
+        {
+            _userRepository = userRepository;
+            _jwtTokenHelper = jwtTokenHelper;
+        }
+
+        public async Task<LoginResponse> Login(LoginRequest request)
+        {
+            var user = await _userRepository.GetByUsername(request.UserName);
+
+            if (user == null || user.IsActive != 1)
+                return null;
+
+            bool isValidPassword = PasswordHasher.VerifyPassword(
+                request.Password,
+                user.PasswordHash,
+                user.PasswordSalt
+            );
+
+            if (!isValidPassword)
+                return null;
+
+            var roles = new List<string> {user.RoleName };
+
+            var tokenResult = _jwtTokenHelper.GenerateToken(
+                user.Id,
+                user.UserName,
+                roles
+            );
+
+            return new LoginResponse
+            {
+                Token = tokenResult.Token,
+                ExpiresAt = tokenResult.ExpireAt,
+                Roles = roles
+            };
+        }
+        public async Task<bool> Register(RegisterRequestDto request, int createdBy)
+        {
+            var exists = await _userRepository.IsUsernameExists(request.Username);
+            if (exists)
+                return false;
+
+            PasswordHasher.CreatePasswordHash(
+                request.Password,
+                out string passwordHash,
+                out string passwordSalt
+            );
+
+            var user = new User
+            {
+                UserName = request.Username,
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt,
+                RoleId = request.RoleId,
+                CreatedBy = createdBy
+            };
+
+            var userId = await _userRepository.Create(user);
+
+            return userId > 0;
+        }
+    }
+}

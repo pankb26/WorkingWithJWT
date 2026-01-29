@@ -1,0 +1,18 @@
+﻿using System;
+
+namespace JWTHLAPI.ModelLayer.Entities.Hotel
+{
+    public class HotelCounter
+    {
+        public int Id { get; set; }
+        public string CounterName { get; set; }
+
+        public DateTime CreatedAt { get; set; }
+        public int? CreatedBy { get; set; }
+
+        public DateTime? UpdatedAt { get; set; }
+        public int? UpdatedBy { get; set; }
+
+        public int IsActive { get; set; }
+    }
+}
