@@ -20,12 +20,15 @@ namespace JWTHLAPI.Helpers
         public (string Token, DateTime ExpireAt) GenerateToken(
             int userId,
             string userName,
+            int roleId,
             List<string> roles)
         {
             var claims = new List<Claim>
             {
+                
                 new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
-                new Claim(ClaimTypes.Name, userName)
+                new Claim(ClaimTypes.Name, userName),
+                new Claim("roleId", roleId.ToString())
             };
 
             foreach (var role in roles)

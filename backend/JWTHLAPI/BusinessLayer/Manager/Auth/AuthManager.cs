@@ -41,6 +41,7 @@ namespace JWTHLAPI.BusinessLayer.Manager.Auth
             var tokenResult = _jwtTokenHelper.GenerateToken(
                 user.Id,
                 user.UserName,
+                user.RoleId,
                 roles
             );
 

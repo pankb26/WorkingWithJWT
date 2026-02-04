@@ -42,8 +42,10 @@ namespace JWTHLAPI
         {
             // ---------- DB CONTEXT ----------
             services.AddSingleton<HMDBContext>();
-
+            //---------- HELPERS ----------
             services.AddScoped<JwtTokenHelper>();
+            services.AddScoped<IPermissionRepository, PermissionRepository>();
+            services.AddScoped<PermissionManager>();
 
             // ---------- AUTH ----------
             services.AddScoped<IUserRepository, UserRepository>();
