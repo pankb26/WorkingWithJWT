@@ -1,5 +1,6 @@
 ﻿using JWTHLAPI.BusinessLayer.Manager.Auth;
 using JWTHLAPI.ModelLayer.DTO.Auth;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Security.Claims;
@@ -17,7 +18,7 @@ namespace JWTHLAPI.Controllers.Auth
         {
             _authManager = authManager;
         }
-
+        [AllowAnonymous]
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
@@ -60,7 +61,9 @@ namespace JWTHLAPI.Controllers.Auth
                 });
             }
         }
+        [AllowAnonymous]
         [HttpPost("register")]
+        
         public async Task<IActionResult> Register(RegisterRequestDto request)
         {
             var adminId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
