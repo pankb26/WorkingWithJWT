@@ -126,15 +126,29 @@ namespace JWTHLAPI
                 });
             });
             // ---------- CORS ----------
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy("AllowAll",
+            //        builder =>
+            //        {
+            //            builder.AllowAnyOrigin()
+            //                   .AllowAnyHeader()
+            //                   .AllowAnyMethod();
+            //        });
+            //});
             services.AddCors(options =>
             {
-                options.AddPolicy("AllowAll",
-                    builder =>
-                    {
-                        builder.AllowAnyOrigin()
-                               .AllowAnyHeader()
-                               .AllowAnyMethod();
-                    });
+                options.AddPolicy("FrontendPolicy", builder =>
+                {
+                    builder
+                        .WithOrigins(
+                            "http://localhost:4200",
+                            "http://192.168.0.105:4200",
+                            "https://192.168.0.105:4200"
+                        )
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
             });
         }
 
@@ -155,7 +169,7 @@ namespace JWTHLAPI
 
             app.UseRouting();
 
-            app.UseCors("AllowAll");
+            app.UseCors("FrontendPolicy");
 
             app.UseAuthentication(); 
             app.UseAuthorization();
