@@ -31,8 +31,8 @@ namespace JWTHLAPI.Helpers
                 
                 new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
                 new Claim(ClaimTypes.Name, userName),
-                new Claim(ClaimTypes.Role, roleName),
-                new Claim("roleId", roleId.ToString())
+                new Claim("roleId", roleId.ToString()),
+                new Claim(ClaimTypes.Role, roleName)
                // new Claim(ClaimTypes.Role, roleId.ToString())
 
             };

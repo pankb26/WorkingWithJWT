@@ -10,5 +10,6 @@ namespace JWTHLAPI.DataLayer.Interfaces.Auth
         Task<int> Update(int id, RolePermissionCreateUpdateRequest request);
         Task<int> Delete(int id);
         Task<IEnumerable<RolePermissionResponse>> GetByRole(int roleId);
+        Task<IEnumerable<RolePermissionResponse>> GetAll();
     }
 }

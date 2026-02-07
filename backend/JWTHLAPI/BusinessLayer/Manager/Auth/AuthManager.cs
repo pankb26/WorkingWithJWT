@@ -52,7 +52,8 @@ namespace JWTHLAPI.BusinessLayer.Manager.Auth
             {
                 Token = tokenResult.Token,
                 ExpiresAt = tokenResult.ExpireAt,
-                RoleId = user.RoleId
+                RoleId = user.RoleId,
+                RoleName = user.RoleName
             };
         }
         //public async Task<bool> Register(RegisterRequestDto request, int createdBy)

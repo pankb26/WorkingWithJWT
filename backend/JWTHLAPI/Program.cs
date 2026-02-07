@@ -9,20 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace JWTHLAPI
 {
-    //public class Program
-    //{
-    //    public static void Main(string[] args)
-    //    {
-    //        CreateHostBuilder(args).Build().Run();
-    //    }
-
-    //    public static IHostBuilder CreateHostBuilder(string[] args) =>
-    //        Host.CreateDefaultBuilder(args)
-    //            .ConfigureWebHostDefaults(webBuilder =>
-    //            {
-    //                webBuilder.UseStartup<Startup>();
-    //            });
-    //}
+  
     public class Program
     {
         public static void Main(string[] args)
@@ -34,12 +21,7 @@ namespace JWTHLAPI
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    //webBuilder.ConfigureKestrel(options =>
-                    //{
-                    //    var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-                    //    options.ListenAnyIP(int.Parse(port));
-                    //});
-
+                   
                     webBuilder.UseStartup<Startup>();
                 });
     }

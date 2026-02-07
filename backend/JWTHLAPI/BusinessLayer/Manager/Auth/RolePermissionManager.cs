@@ -25,5 +25,7 @@ namespace JWTHLAPI.BusinessLayer.Manager.Auth
 
         public Task<IEnumerable<RolePermissionResponse>> GetByRole(int roleId)
             => _repo.GetByRole(roleId);
+        public Task<IEnumerable<RolePermissionResponse>> GetAll()
+            => _repo.GetAll();
     }
 }

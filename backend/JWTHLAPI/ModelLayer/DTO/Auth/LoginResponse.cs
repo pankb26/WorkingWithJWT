@@ -11,5 +11,6 @@ namespace JWTHLAPI.ModelLayer.DTO.Auth
 
       //  public List<string> Roles { get; set; }
       public int RoleId { get; set; }
+      public string RoleName { get; set; }
     }
 }

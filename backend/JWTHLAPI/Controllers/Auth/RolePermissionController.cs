@@ -44,5 +44,11 @@ namespace JWTHLAPI.Controllers.Auth
             await _manager.Delete(id);
             return Ok("Permission Removed");
         }
+        [HttpGet("GetAll")]
+        public async Task<IActionResult> GetAll()
+        {
+            return Ok(await _manager.GetAll());
+
+        }
     }
 }

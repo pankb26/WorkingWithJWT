@@ -70,5 +70,26 @@ namespace JWTHLAPI.DataLayer.Repository.Auth
             using var conn = _db.CreateConnection();
             return await conn.QueryAsync<RolePermissionResponse>(sql, new { RoleId = roleId });
         }
+        public async Task<IEnumerable<RolePermissionResponse>> GetAll()
+        {
+            var sql = @"
+        SELECT
+            RP.Id,
+            R.RoleName,
+            F.FormName,
+            RP.CanRead,
+            RP.CanCreate,
+            RP.CanUpdate,
+            RP.CanDelete
+        FROM RoleFormPermission RP
+        INNER JOIN Roles R ON RP.RoleId = R.Id
+        INNER JOIN Forms F ON RP.FormId = F.Id
+        WHERE RP.IsActive = 1
+        ORDER BY R.RoleName, F.FormName";
+
+            using var conn = _db.CreateConnection();
+            return await conn.QueryAsync<RolePermissionResponse>(sql);
+        }
+
     }
 }

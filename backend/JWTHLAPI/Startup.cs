@@ -1,10 +1,10 @@
 using JWTHLAPI.BusinessLayer.Manager.Auth;
 using JWTHLAPI.BusinessLayer.Manager.Hotel;
-using JWTHLAPI.BusinessLayer.Manager.Lodge;
+//using JWTHLAPI.BusinessLayer.Manager.Lodge;
 using JWTHLAPI.DataLayer;
 using JWTHLAPI.DataLayer.Interfaces.Auth;
 using JWTHLAPI.DataLayer.Interfaces.Hotel;
-using JWTHLAPI.DataLayer.Interfaces.Lodge;
+//using JWTHLAPI.DataLayer.Interfaces.Lodge;
 using JWTHLAPI.DataLayer.Repository.Auth;
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
