@@ -34,11 +34,11 @@ namespace JWTHLAPI
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.ConfigureKestrel(options =>
-                    {
-                        var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-                        options.ListenAnyIP(int.Parse(port));
-                    });
+                    //webBuilder.ConfigureKestrel(options =>
+                    //{
+                    //    var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+                    //    options.ListenAnyIP(int.Parse(port));
+                    //});
 
                     webBuilder.UseStartup<Startup>();
                 });

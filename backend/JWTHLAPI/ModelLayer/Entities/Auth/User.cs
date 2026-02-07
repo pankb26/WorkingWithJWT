@@ -21,7 +21,7 @@ namespace JWTHLAPI.ModelLayer.Entities.Auth
         public DateTime? UpdatedAt { get; set; }
         public int? UpdatedBy { get; set; }
 
-        // Soft delete
+        
         public int IsActive { get; set; }
     }
 }

@@ -7,6 +7,7 @@ namespace JWTHLAPI.ModelLayer.Entities.Auth
         public int Id { get; set; }
 
         public string RoleName { get; set; }
+        public bool IsDefault { get; set; }
 
         public DateTime CreatedAt { get; set; }
         public int CreatedBy { get; set; }

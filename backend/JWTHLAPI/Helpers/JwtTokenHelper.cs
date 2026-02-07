@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
@@ -21,21 +22,25 @@ namespace JWTHLAPI.Helpers
             int userId,
             string userName,
             int roleId,
-            List<string> roles)
+            string roleName
+            )
+            //List<string> roles)
         {
             var claims = new List<Claim>
             {
                 
                 new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
                 new Claim(ClaimTypes.Name, userName),
+                new Claim(ClaimTypes.Role, roleName),
                 new Claim("roleId", roleId.ToString())
+               // new Claim(ClaimTypes.Role, roleId.ToString())
+
             };
 
-            foreach (var role in roles)
-            {
-                claims.Add(new Claim(ClaimTypes.Role, role));
-            }
-
+            //foreach (var role in roles)
+            //{
+            //    claims.Add(new Claim(ClaimTypes.Role, role));
+            //}
             var key = new SymmetricSecurityKey(
                 Encoding.UTF8.GetBytes(_configuration["Jwt:Key"])
             );

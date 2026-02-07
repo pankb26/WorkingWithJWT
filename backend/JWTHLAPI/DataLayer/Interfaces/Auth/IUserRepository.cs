@@ -8,5 +8,6 @@ namespace JWTHLAPI.DataLayer.Interfaces.Auth
         Task<User> GetByUsername(string userName);
         Task<bool> IsUsernameExists(string userName);
         Task<int> Create(User user);
+        Task<int> GetDefaultRoleId();
     }
 }

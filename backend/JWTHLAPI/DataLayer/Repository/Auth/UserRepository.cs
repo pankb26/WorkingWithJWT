@@ -84,5 +84,16 @@ namespace JWTHLAPI.DataLayer.Repository.Auth
                 return await connection.ExecuteScalarAsync<int>(sql, user);
             }
         }
+        public async Task<int> GetDefaultRoleId()
+        {
+            var sql = @"
+        SELECT TOP 1 Id
+        FROM Roles
+        WHERE IsDefault = 1 AND IsActive = 1
+    ";
+
+            using var connection = _dbContext.CreateConnection();
+            return await connection.ExecuteScalarAsync<int>(sql);
+        }
     }
 }

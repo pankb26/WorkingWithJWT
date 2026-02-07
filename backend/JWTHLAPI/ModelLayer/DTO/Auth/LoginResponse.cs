@@ -9,6 +9,7 @@ namespace JWTHLAPI.ModelLayer.DTO.Auth
 
         public DateTime ExpiresAt { get; set; }
 
-        public List<string> Roles { get; set; }
+      //  public List<string> Roles { get; set; }
+      public int RoleId { get; set; }
     }
 }

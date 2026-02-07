@@ -150,6 +150,11 @@ namespace JWTHLAPI
                         .AllowAnyMethod();
                 });
             });
+            //services.AddAuthorization(options =>
+            //{
+            //    options.AddPolicy("AdminOnly", policy =>
+            //        policy.RequireClaim("roleId", "1")); 
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
