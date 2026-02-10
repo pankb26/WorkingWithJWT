@@ -17,11 +17,17 @@ namespace JWTHLAPI.DataLayer.Repository.Auth
 
         public async Task<int> Assign(RolePermissionCreateUpdateRequest request)
         {
-            var sql = @"
-                INSERT INTO RoleFormPermission
-                (RoleId, FormId, CanRead, CanCreate, CanUpdate, CanDelete)
-                VALUES
-                (@RoleId, @FormId, @CanRead, @CanCreate, @CanUpdate, @CanDelete)";
+            var sql = @"IF  EXISTS (SELECT 1 FROM RoleFormPermission WHERE RoleId = @RoleId AND FormId = @FormId AND IsActive = 1) SELECT 0;
+                BEGIN
+                     INSERT INTO RoleFormPermission
+                    (RoleId, FormId, CanRead, CanCreate, CanUpdate, CanDelete,IsActive,CreatedAt)
+                    VALUES
+                    (@RoleId, @FormId, @CanRead, @CanCreate, @CanUpdate, @CanDelete,1,GETDATE());
+                    SELECT 1;
+                END
+                
+
+               ";
 
             using var conn = _db.CreateConnection();
             return await conn.ExecuteAsync(sql, request);
@@ -36,7 +42,7 @@ namespace JWTHLAPI.DataLayer.Repository.Auth
                     CanUpdate=@CanUpdate,
                     CanDelete=@CanDelete,
                     UpdatedAt=GETDATE()
-                WHERE Id=@Id";
+                WHERE Id=@Id AND IsActive=0";
 
             using var conn = _db.CreateConnection();
             return await conn.ExecuteAsync(sql, new { Id = id, request.CanRead, request.CanCreate, request.CanUpdate, request.CanDelete });

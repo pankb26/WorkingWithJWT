@@ -54,6 +54,11 @@ namespace JWTHLAPI
             services.AddScoped<IRolePermissionRepository, RolePermissionRepository>();
             services.AddScoped<RolePermissionManager>();
 
+            //--------------- RoleManager -------------------
+
+            services.AddScoped<IRoleRepository, RoleRepository>();
+            services.AddScoped<RoleManager>();
+
             // ---------- HOTEL ----------
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<CategoryManager>();

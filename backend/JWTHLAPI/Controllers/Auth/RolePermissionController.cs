@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using JWTHLAPI.BusinessLayer.Manager.Auth;
+﻿using JWTHLAPI.BusinessLayer.Manager.Auth;
+using JWTHLAPI.ModelLayer.Common;
 using JWTHLAPI.ModelLayer.DTO.Auth;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace JWTHLAPI.Controllers.Auth
@@ -21,8 +22,20 @@ namespace JWTHLAPI.Controllers.Auth
         [HttpPost("AssignRole")]
         public async Task<IActionResult> Assign(RolePermissionCreateUpdateRequest request)
         {
-            await _manager.Assign(request);
-            return Ok("Permission Assigned");
+            var result = await _manager.Assign(request);
+
+            if (result == 0)
+            {
+                return Ok(new ApiResponse(
+                    false,
+                    "Permission already assigned for this role and form"
+                ));
+            }
+
+            return Ok(new ApiResponse(
+                true,
+                "Permission assigned successfully"
+            ));
         }
 
         [HttpGet("GetByRole")]
