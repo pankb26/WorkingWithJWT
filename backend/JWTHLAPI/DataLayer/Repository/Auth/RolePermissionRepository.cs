@@ -42,7 +42,7 @@ namespace JWTHLAPI.DataLayer.Repository.Auth
                     CanUpdate=@CanUpdate,
                     CanDelete=@CanDelete,
                     UpdatedAt=GETDATE()
-                WHERE Id=@Id AND IsActive=0";
+                WHERE Id=@Id AND IsActive=1";
 
             using var conn = _db.CreateConnection();
             return await conn.ExecuteAsync(sql, new { Id = id, request.CanRead, request.CanCreate, request.CanUpdate, request.CanDelete });
